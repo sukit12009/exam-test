@@ -3,13 +3,6 @@ import { Product, CartItem, NotificationProps, CartContextType } from './types';
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-const mockProducts: Product[] = [
-  { id: 1, name: 'T-Shirt', price: 399, image: 'https://via.placeholder.com/80', stock: 10 },
-  { id: 2, name: 'Jeans', price: 799, image: 'https://via.placeholder.com/80', stock: 10 },
-  { id: 3, name: 'Sneakers', price: 1299, image: 'https://via.placeholder.com/80', stock: 10 },
-  { id: 4, name: 'Cap', price: 299, image: 'https://via.placeholder.com/80', stock: 10 },
-];
-
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
@@ -26,9 +19,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       }));
       setProducts(parsedProducts);
       localStorage.setItem('products', JSON.stringify(parsedProducts));
-    } else {
-      localStorage.setItem('products', JSON.stringify(mockProducts));
-      setProducts(mockProducts);
     }
 
     // Load cart from localStorage
