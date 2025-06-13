@@ -43,9 +43,9 @@ const PaginationHookPage = () => {
   });
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <div className="bg-white rounded-lg shadow p-6">
-        <h1 className="text-2xl font-bold mb-6">Custom Pagination Hook</h1>
+    <div className="p-6 max-w-4xl mx-auto min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors duration-200">
+        <h1 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Custom Pagination Hook</h1>
         
         <PaginatedList 
           items={items}
