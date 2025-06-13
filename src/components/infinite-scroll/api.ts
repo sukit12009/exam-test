@@ -11,12 +11,15 @@ export const fetchPosts = async (page: number): Promise<FetchPostsResponse> => {
   const start = (page - 1) * POSTS_PER_PAGE;
   const end = start + POSTS_PER_PAGE;
   
-  const mockPosts: Post[] = Array.from({ length: POSTS_PER_PAGE }, (_, i) => ({
-    id: start + i + 1,
-    title: `Post ${start + i + 1}`,
-    body: `This is the body of post ${start + i + 1}. It contains some sample content to demonstrate infinite scrolling.`,
-    userId: Math.floor(Math.random() * 10) + 1,
-  }));
+  const mockPosts: Post[] = Array.from({ length: POSTS_PER_PAGE }, (_, i) => {
+    const postNumber = start + i + 1;
+    return {
+      id: postNumber,
+      title: `Post ${postNumber}`,
+      body: `This is the body of post ${postNumber}. It contains some sample content to demonstrate infinite scrolling.`,
+      userId: Math.floor(Math.random() * 10) + 1,
+    };
+  });
   
   const hasMore = end < TOTAL_POSTS;
   

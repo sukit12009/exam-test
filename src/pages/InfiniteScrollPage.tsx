@@ -34,7 +34,13 @@ const InfiniteScrollPage = () => {
         
         const { data, hasMore: morePosts } = await fetchPosts(page);
         
-        setPosts(prevPosts => [...prevPosts, ...data]);
+        // Use a Set to ensure unique posts based on ID
+        setPosts(prevPosts => {
+          const postIds = new Set(prevPosts.map(post => post.id));
+          const newPosts = data.filter(post => !postIds.has(post.id));
+          return [...prevPosts, ...newPosts];
+        });
+        
         setHasMore(morePosts);
       } catch (err) {
         setError('Failed to fetch posts. Please try again later.');
