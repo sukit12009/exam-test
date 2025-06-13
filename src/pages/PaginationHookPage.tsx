@@ -1,34 +1,18 @@
+import { useState, useEffect } from 'react';
 import usePagination from '../hooks/usePagination';
 import Pagination from '../components/pagination/Pagination';
-import PaginatedList from '../components/pagination/PaginatedList';
-
-// Mock API function to simulate fetching data
-const fetchMockData = async (page: number, limit: number) => {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
-  // Generate mock data
-  const totalItems = 100;
-  const startIndex = (page - 1) * limit;
-  const endIndex = Math.min(startIndex + limit, totalItems);
-  
-  const data = Array.from({ length: endIndex - startIndex }, (_, i) => ({
-    id: startIndex + i + 1,
-    title: `Item ${startIndex + i + 1}`,
-    description: `This is item number ${startIndex + i + 1} in the list`,
-  }));
-  
-  return { data, total: totalItems };
-};
+import ProductList from '../components/pagination/ProductList';
+import { fetchProducts } from '../components/pagination/api';
+import { Item } from '../components/pagination/types';
 
 const PaginationHookPage = () => {
   const itemsPerPage = 10;
+  const [error, setError] = useState<string | null>(null);
   
   const {
     currentPage,
-    items,
+    items = [],
     isLoading,
-    error,
     totalPages,
     totalItems,
     hasNextPage,
@@ -36,18 +20,27 @@ const PaginationHookPage = () => {
     goToPage,
     nextPage,
     prevPage,
-  } = usePagination({
+  } = usePagination<Item>({
     itemsPerPage,
-    apiCall: fetchMockData,
+    apiCall: fetchProducts,
     initialPage: 1,
   });
+
+  // Handle errors from the pagination hook
+  useEffect(() => {
+    if (error) {
+      setError(error);
+    }
+  }, [error]);
 
   return (
     <div className="p-6 max-w-4xl mx-auto min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors duration-200">
-        <h1 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Custom Pagination Hook</h1>
+        <h1 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">
+          Product Catalog
+        </h1>
         
-        <PaginatedList 
+        <ProductList 
           items={items}
           isLoading={isLoading}
           error={error}
@@ -66,7 +59,7 @@ const PaginationHookPage = () => {
             onNext={nextPage}
             onPrev={prevPage}
           />
-        </PaginatedList>
+        </ProductList>
       </div>
     </div>
   );

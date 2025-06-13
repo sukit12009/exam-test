@@ -37,6 +37,18 @@ const Pagination: React.FC<PaginationProps> = ({
       
       <div className="flex items-center space-x-2">
         <button
+          onClick={() => onPageChange(1)}
+          disabled={currentPage === 1 || isLoading}
+          className={`px-3 py-1 rounded-md transition-colors duration-200 ${
+            currentPage > 1
+              ? 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
+              : 'bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
+          }`}
+          title="First Page"
+        >
+          ««
+        </button>
+        <button
           onClick={onPrev}
           disabled={!hasPrevPage || isLoading}
           className={`px-3 py-1 rounded-md transition-colors duration-200 ${
@@ -44,8 +56,9 @@ const Pagination: React.FC<PaginationProps> = ({
               ? 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
               : 'bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
           }`}
+          title="Previous Page"
         >
-          Previous
+          «
         </button>
         
         <div className="flex items-center space-x-1">
@@ -87,8 +100,21 @@ const Pagination: React.FC<PaginationProps> = ({
               ? 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
               : 'bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
           }`}
+          title="Next Page"
         >
-          Next
+          »
+        </button>
+        <button
+          onClick={() => onPageChange(totalPages)}
+          disabled={currentPage === totalPages || isLoading}
+          className={`px-3 py-1 rounded-md transition-colors duration-200 ${
+            currentPage < totalPages
+              ? 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
+              : 'bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
+          }`}
+          title="Last Page"
+        >
+          »»
         </button>
       </div>
     </div>
