@@ -26,8 +26,8 @@ const ProductList = ({ products, onEdit, onDelete, isDeleting }: ProductListProp
             d="M20 7l-8-4.5L4 7m16 0l-8 4.5M4 7v9.5l8 4.5m0-14l8 4.5m-8-4.5V19l8-4.5m0 0l8-4.5V19"
           />
         </svg>
-        <h3 className="mt-2 text-sm font-medium text-gray-900">No products</h3>
-        <p className="mt-1 text-sm text-gray-500">
+        <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-white">No products</h3>
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           Get started by adding a new product.
         </p>
       </div>
