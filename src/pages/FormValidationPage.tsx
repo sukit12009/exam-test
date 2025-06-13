@@ -4,11 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as FiIcons from "react-icons/fi";
 
 import { formSchema, FormData } from "../types/form";
-import InputField from "../components/form/InputField";
-import FormHeader from "../components/form/FormHeader";
-import SuccessMessage from "../components/form/SuccessMessage";
-import TermsCheckbox from "../components/form/TermsCheckbox";
-import SubmitButton from "../components/form/SubmitButton";
+import InputField from "../components/form-validation/InputField";
+import FormHeader from "../components/form-validation/FormHeader";
+import SuccessMessage from "../components/form-validation/SuccessMessage";
+import TermsCheckbox from "../components/form-validation/TermsCheckbox";
+import SubmitButton from "../components/form-validation/SubmitButton";
 
 // Create typed icon components
 const FiUser = FiIcons.FiUser as React.ComponentType<
