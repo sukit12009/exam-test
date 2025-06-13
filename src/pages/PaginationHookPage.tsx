@@ -1,6 +1,6 @@
 import usePagination from '../hooks/usePagination';
-import Pagination from '../components/Pagination';
-import PaginatedList from '../components/PaginatedList';
+import Pagination from '../components/pagination/Pagination';
+import PaginatedList from '../components/pagination/PaginatedList';
 
 // Mock API function to simulate fetching data
 const fetchMockData = async (page: number, limit: number) => {
