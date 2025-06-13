@@ -1,27 +1,25 @@
 import { Post, FetchPostsResponse } from './types';
 
-const API_DELAY = 800;
-const TOTAL_POSTS = 50;
 const POSTS_PER_PAGE = 10;
+const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 
 export const fetchPosts = async (page: number): Promise<FetchPostsResponse> => {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, API_DELAY));
-  
-  const start = (page - 1) * POSTS_PER_PAGE;
-  const end = start + POSTS_PER_PAGE;
-  
-  const mockPosts: Post[] = Array.from({ length: POSTS_PER_PAGE }, (_, i) => {
-    const postNumber = start + i + 1;
-    return {
-      id: postNumber,
-      title: `Post ${postNumber}`,
-      body: `This is the body of post ${postNumber}. It contains some sample content to demonstrate infinite scrolling.`,
-      userId: Math.floor(Math.random() * 10) + 1,
-    };
-  });
-  
-  const hasMore = end < TOTAL_POSTS;
-  
-  return { data: mockPosts, hasMore };
+  try {
+    const response = await fetch(
+      `${API_URL}?_page=${page}&_limit=${POSTS_PER_PAGE}`
+    );
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch posts');
+    }
+    
+    const data: Post[] = await response.json();
+    const totalPosts = parseInt(response.headers.get('x-total-count') || '0', 10);
+    const hasMore = page * POSTS_PER_PAGE < totalPosts;
+    
+    return { data, hasMore };
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    throw error;
+  }
 };
