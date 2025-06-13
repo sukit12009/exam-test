@@ -56,7 +56,7 @@ const FormValidationPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-800 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden md:max-w-2xl p-6">
+      <div className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-none overflow-hidden md:max-w-2xl p-6">
         <FormHeader
           title="Create an Account"
           subtitle="Join us today! Fill out the form to get started."
